@@ -6,6 +6,12 @@ name = "pypi"
 [packages]
 django = "*"
 djangorestframework = "*"
+pymysql = "*"
+mysqlclient = "*"
+django-mysql = "*"
+django-cors-headers = "*"
+pika = "*"
+python-decouple = "*"
 
 [dev-packages]
 
