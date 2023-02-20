@@ -17,10 +17,20 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    command: 'python main.py'
     restart: always
     ports:
       - 8001:8080
     volumes:
       - .:/app
+    depends_on:
+      - db
+
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'python consumer.py'
+    restart: always
     depends_on:
       - db

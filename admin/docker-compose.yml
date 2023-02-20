@@ -17,6 +17,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    command: 'python manage.py runserver 0.0.0.0:8000'
     restart: always
     ports:
       - 8000:8000
@@ -25,3 +26,11 @@ services:
     depends_on:
       - db
     # command: ./wait-for-it.sh -t 40 db:33066
+
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'python consumer.py'
+    depends_on:
+      - db

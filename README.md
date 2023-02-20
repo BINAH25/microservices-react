@@ -12,12 +12,9 @@ Start mysql services:
 
     $ brew services start mysql
 
-## Docker
+## RabbitMQ
 
-### Create new Django app in container
-
-    $ docker-compose exec backend sh
-    $ python manage.py startapp products
+Service used is CloudAMQP, and they have a free account: https://www.cloudamqp.com
 
 ## Environment Variables
 
@@ -29,6 +26,7 @@ Create a .env file in the admin folder with the following variables:
     MYSQL_PASSWORD=your-mysql-password
     MYSQL_HOST=your-mysql-host-name
     MYSQL_PORT=your-mysql-port
+    CLOUDAMQP_URL=your-cloudamqp-instance-connection-string
 
 Create a .env file in the main folder with the following variables:
 
@@ -37,6 +35,7 @@ Create a .env file in the main folder with the following variables:
     MYSQL_PASSWORD=your-mysql-password
     MYSQL_HOST=your-mysql-host-name
     MYSQL_PORT=your-mysql-port
+    CLOUDAMQP_URL=your-cloudamqp-instance-connection-string
 
 ## Access
 
@@ -51,6 +50,11 @@ Start admin service:
 
     $ cd admin/
     $ docker-compose up
+
+### Create new Django app in container
+
+    $ docker-compose exec backend sh
+    $ python manage.py startapp products
 
 ### Make Migrations
 
