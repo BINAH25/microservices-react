@@ -39,8 +39,8 @@ Create a .env file in the main folder with the following variables:
 
 ## Access
 
-Django: http://0.0.0.0:8000/
-Flask: http://0.0.0.0:8001/
+- Django: http://0.0.0.0:8000/
+- Flask: http://0.0.0.0:8001/
 
 # Run
 
@@ -105,6 +105,16 @@ Generate migrations:
 Apply migrations to DB:
 
     $ flask db upgrade
+
+## CRUD - React App
+
+Create React app:
+
+    $ npx create-react-app react-crud --template typescript
+
+Stop node_modules syncing with Dropbox:
+
+    $ xattr -w com.dropbox.ignored 1 node_modules/
 
 # Design and Architecture
 

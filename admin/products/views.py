@@ -73,3 +73,7 @@ class UserAPIView(APIView):
         return Response({
             'id': user.id
         })
+    
+    def post(self, _):
+        User.objects.create()
+        return Response(status=status.HTTP_201_CREATED)
