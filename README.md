@@ -2,6 +2,8 @@
 
 This is a simple app to demonstrate microservices. It is implemented with Django and Flask services on the backend, React webapp on the frontend, Docker for handling containerization, and RabbitMQ for events.
 
+From course: https://www.youtube.com/watch?v=0iB5IPoTDts&t=10s
+
 # Setup
 
 ## MySQL
@@ -37,10 +39,16 @@ Create a .env file in the main folder with the following variables:
     MYSQL_PORT=your-mysql-port
     CLOUDAMQP_URL=your-cloudamqp-instance-connection-string
 
+Create a .env file in the main folder with the following variables:
+
+    REACT_APP_MAIN_ENDPOINT=http://localhost:8001/api/products
+    REACT_APP_ADMIN_ENDPOINT=http://localhost:8000/api/products
+
 ## Access
 
 - Django: http://0.0.0.0:8000/
 - Flask: http://0.0.0.0:8001/
+- React: http://localhost:3000
 
 # Run
 
@@ -115,6 +123,21 @@ Create React app:
 Stop node_modules syncing with Dropbox:
 
     $ xattr -w com.dropbox.ignored 1 node_modules/
+
+Start app:
+
+    $ npm start
+
+Install react-router-dom:
+
+    $ npm install react-router-dom @types/react-router-dom
+
+### Routes
+
+- Main -> /
+- Products -> admin/products
+- Create Product -> admin/products/create
+- Edit Product -> admin/products/:id/edit
 
 # Design and Architecture
 
