@@ -12,6 +12,13 @@ django-mysql = "*"
 django-cors-headers = "*"
 pika = "*"
 python-decouple = "*"
+flask = "*"
+flask-sqlalchemy = "*"
+sqlalchemy = "*"
+flask-cors = "*"
+requests = "*"
+python-dotenv = "*"
+flask-migrate = "*"
 
 [dev-packages]
 

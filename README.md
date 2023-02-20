@@ -30,22 +30,27 @@ Create a .env file in the admin folder with the following variables:
     MYSQL_HOST=your-mysql-host-name
     MYSQL_PORT=your-mysql-port
 
+Create a .env file in the main folder with the following variables:
+
+    MYSQL_DB=your-mysql-db-name
+    MYSQL_USER=your-mysql-user-name
+    MYSQL_PASSWORD=your-mysql-password
+    MYSQL_HOST=your-mysql-host-name
+    MYSQL_PORT=your-mysql-port
+
+## Access
+
+Django: http://0.0.0.0:8000/
+Flask: http://0.0.0.0:8001/
+
 # Run
+
+## Admin - Django App
 
 Start admin service:
 
     $ cd admin/
     $ docker-compose up
-
-## Build
-
-    $ docker-compose up --build
-
-## Admin
-
-    $ docker-compose up
-
-## Migrations and Fixtures
 
 ### Make Migrations
 
@@ -72,6 +77,31 @@ Load all fixtures:
 
     $ docker-compose exec django python manage.py loaddata **/fixtures/*.json
 
+## Main - Flask App
+
+Start main service:
+
+    $ cd main/
+    $ docker-compose up
+
+### Migrations
+
+Open shell:
+
+    $ docker-compose exec backend sh
+
+Create migration repository:
+
+    $ flask db init
+
+Generate migrations:
+
+    $ flask db migrate -m 'Initial migration'
+
+Apply migrations to DB:
+
+    $ flask db upgrade
+
 # Design and Architecture
 
 ![Microservices](microservices.png)
@@ -79,6 +109,10 @@ Load all fixtures:
 ![Architecture](architecture.png)
 
 # Docker Instructions
+
+Build:
+
+    $ docker-compose up --build
 
 Open shell:
 
