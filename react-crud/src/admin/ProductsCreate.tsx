@@ -1,6 +1,7 @@
 import React, { SyntheticEvent, useState } from 'react'
 import Wrapper from './Wrapper'
 import { Navigate } from 'react-router-dom'
+import { REACT_APP_ADMIN_ENDPOINT } from "../constant";
 
 const ProductsCreate = () => {
   const [title, setTitle] = useState('')
@@ -10,7 +11,7 @@ const ProductsCreate = () => {
   const submit = async (e: SyntheticEvent) => {
     e.preventDefault()
 
-    await fetch(process.env.REACT_APP_ADMIN_ENDPOINT as string, {
+    await fetch(REACT_APP_ADMIN_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

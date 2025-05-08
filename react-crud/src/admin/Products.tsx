@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Wrapper from './Wrapper'
 import { Product } from '../interfaces/product'
 import { Link } from 'react-router-dom'
+import { REACT_APP_ADMIN_ENDPOINT } from "../constant";
 
 const Products = () => {
   const [products, setProducts] = useState([])
@@ -9,7 +10,7 @@ const Products = () => {
   useEffect(() => {
     ;(async () => {
       const response = await fetch(
-        process.env.REACT_APP_ADMIN_ENDPOINT as string
+        REACT_APP_ADMIN_ENDPOINT
       )
 
       const data = await response.json()
@@ -20,7 +21,7 @@ const Products = () => {
 
   const del = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
-      await fetch(`${process.env.REACT_APP_ADMIN_ENDPOINT as string}/${id}`, {
+      await fetch(`${REACT_APP_ADMIN_ENDPOINT}/${id}`, {
         method: 'DELETE',
       })
 

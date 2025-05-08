@@ -2,6 +2,7 @@ import React, { PropsWithRef, SyntheticEvent, useEffect, useState } from 'react'
 import Wrapper from './Wrapper'
 import { Navigate, useParams } from 'react-router-dom'
 import { Product } from '../interfaces/product'
+import { REACT_APP_ADMIN_ENDPOINT } from "../constant";
 
 const ProductsEdit = (props: PropsWithRef<any>) => {
   const { id } = useParams()
@@ -12,7 +13,7 @@ const ProductsEdit = (props: PropsWithRef<any>) => {
   useEffect(() => {
     ;(async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_ADMIN_ENDPOINT as string}/${id}`
+        `${REACT_APP_ADMIN_ENDPOINT}/${id}`
       )
 
       const product: Product = await response.json()
@@ -25,7 +26,7 @@ const ProductsEdit = (props: PropsWithRef<any>) => {
   const submit = async (e: SyntheticEvent) => {
     e.preventDefault()
 
-    await fetch(`${process.env.REACT_APP_ADMIN_ENDPOINT as string}/${id}`, {
+    await fetch(`${REACT_APP_ADMIN_ENDPOINT}/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Product } from '../interfaces/product'
+import { REACT_APP_ADMIN_ENDPOINT , REACT_APP_MAIN_ENDPOINT} from "../constant";
 
 const Main = () => {
   const [products, setProducts] = useState([] as Product[])
@@ -7,7 +8,7 @@ const Main = () => {
   useEffect(() => {
     ;(async () => {
       const response = await fetch(
-        process.env.REACT_APP_ADMIN_ENDPOINT as string
+        REACT_APP_ADMIN_ENDPOINT
       )
 
       const data = await response.json()
@@ -17,7 +18,7 @@ const Main = () => {
   }, [])
 
   const like = async (id: number) => {
-    await fetch(`${process.env.REACT_APP_MAIN_ENDPOINT as string}/${id}/like`, {
+    await fetch(`${REACT_APP_MAIN_ENDPOINT}/${id}/like`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     })
