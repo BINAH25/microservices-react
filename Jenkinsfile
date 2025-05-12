@@ -1,10 +1,18 @@
+def COLOR_MAP = [
+    'SUCCESS': 'good', 
+    'FAILURE': 'danger',
+]
 pipeline {
     agent any
 
     environment {
-        registryCredential = 'ecr:eu-west-1:awscreds'
-        appRegistry = "677276091734.dkr.ecr.eu-west-1.amazonaws.com/lamp-stack-frontend"
-        frontendRegistry = "https://677276091734.dkr.ecr.eu-west-1.amazonaws.com"
+        ECR_REGISTRY = credentials('ecr-registry')
+        ECR_REPOSITORY = credentials('ecr-repository')
+        AWS_REGION = credentials('aws-region')
+        
+        registryCredential = "ecr:${AWS_REGION}:awscreds"
+        appRegistry = "${ECR_REGISTRY}/${ECR_REPOSITORY}"
+        frontendRegistry = "https://${ECR_REGISTRY}"
         cluster = 'frontend-cluster'
         service = 'frontend-cluster-service'
     }
@@ -57,16 +65,16 @@ pipeline {
         }
 
 
-        // stage('Upload Image to ECR') {
-        //     steps {
-        //         script {
-        //             docker.withRegistry( frontendRegistry, registryCredential ){
-        //                 dockerImage.push("$BUILD_NUMBER")
-        //                 dockerImage.push('latest')
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Upload Image to ECR') {
+            steps {
+                script {
+                    docker.withRegistry( frontendRegistry, registryCredential ){
+                        dockerImage.push("$BUILD_NUMBER")
+                        dockerImage.push('latest')
+                    }
+                }
+            }
+        }
 
         // stage('Deploy to ecs') {
         //     steps {
@@ -75,5 +83,14 @@ pipeline {
         //         }
         //     }
         // }
+    }
+
+    post {
+        always {
+            echo 'Slack Notifications.'
+            slackSend channel: '#micro-service-pipeline',
+                color: COLOR_MAP[currentBuild.currentResult],
+                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
+        }
     }
 }
