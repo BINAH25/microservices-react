@@ -13,8 +13,8 @@ pipeline {
         registryCredential = "ecr:${AWS_REGION}:awscreds"
         appRegistry = "${ECR_REGISTRY}/${ECR_REPOSITORY}"
         frontendRegistry = "https://${ECR_REGISTRY}"
-        cluster = 'frontend-cluster'
-        service = 'frontend-cluster-service'
+        cluster = 'micro-service-cluster'
+        service = 'frontend'
     }
 
    
@@ -77,13 +77,13 @@ pipeline {
             }
         }
 
-        // stage('Deploy to ecs') {
-        //     steps {
-        //         withAWS(credentials: 'awscreds', region: 'eu-west-1') {
-        //             sh 'aws ecs update-service --cluster ${cluster} --service ${service} --force-new-deployment'
-        //         }
-        //     }
-        // }
+        stage('Deploy to ecs') {
+            steps {
+                withAWS(credentials: 'awscreds', region: 'eu-east-2') {
+                    sh 'aws ecs update-service --cluster ${cluster} --service ${service} --force-new-deployment'
+                }
+            }
+        }
     }
 
     post {
