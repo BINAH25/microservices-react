@@ -16,7 +16,6 @@ pipeline {
         cluster = 'micro-service-cluster'
         service = 'frontend'
     }
-
    
     stages {
 
