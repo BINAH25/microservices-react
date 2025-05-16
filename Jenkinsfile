@@ -53,6 +53,7 @@ pipeline {
             }
         }
 
+
         stage('Scan Image with Trivy') {
             steps {
                 script {
