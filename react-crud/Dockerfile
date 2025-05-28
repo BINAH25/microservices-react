@@ -7,21 +7,16 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 COPY . .
+
 RUN npm run build
 
-# Stage 2: Serve with Express (includes Prometheus metrics)
+# Use a lightweight web server to serve the built app
+
 FROM node:alpine
 
-WORKDIR /app
-
-# Copy only what's needed to run the server and serve static files
-COPY --from=build /app/build ./build
-COPY server.js ./
-COPY package.json package-lock.json ./
-
-# Reinstall just the production dependencies
-RUN npm install --only=production
+COPY --from=build /app/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
-CMD ["node", "server.js"]
+CMD ["nginx", "-g", "daemon off;"]
