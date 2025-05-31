@@ -25,13 +25,6 @@ pipeline {
         //     }
         // }
 
-        
-        stage('Fetch code') {
-            steps {
-                git url: 'https://github.com/BINAH25/microservices-react.git', branch: "${env.BRANCH_NAME}"
-            }
-        }
-
         stage('Checkout') {
             steps {
                 checkout scm
