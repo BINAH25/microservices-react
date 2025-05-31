@@ -42,7 +42,7 @@ pipeline {
         stage('Build') {
             steps {
                 dir('react-crud') {
-                    sh 'npm run build'
+                    sh 'npm run buiiild'
                 }
             }
         }
