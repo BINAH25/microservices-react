@@ -47,7 +47,6 @@ pipeline {
             }
         }
         
-       
         // stage('Quality Gate') {
         //     steps {
         //         timeout(time: 10, unit: 'MINUTES') {
@@ -128,7 +127,6 @@ pipeline {
         
     }
 
-    // setBuildStatus("Build complete", "SUCCESS");
 }
 void setBuildStatus(String message, String state) {
     step([
