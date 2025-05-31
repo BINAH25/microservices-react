@@ -128,7 +128,6 @@ pipeline {
         
     }
 
-    // setBuildStatus("Build complete", "SUCCESS");
 }
 void setBuildStatus(String message, String state) {
     step([
